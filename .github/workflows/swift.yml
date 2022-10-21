@@ -15,14 +15,21 @@ jobs:
     runs-on: macos-latest
 
     steps:
+    
     - uses: actions/checkout@v3
-    - name: current
-      run: pwd
-    - name: ls
-      run: ls
+    - name: Set up JDK 8
+      uses: actions/setup-java@v3
+      with:
+        java-version: '8'
+        distribution: 'zulu'
+        cache: maven
+    - name: clone mock-server
+      run: git clone https://github.com/upanshu21/open-weather-mock-api.git
+    - name: run mock server
+      run : mvn spring-boot:run
     - name: Build
       working-directory: ./MyLibrary
       run: swift build -v
-#     - name: Run tests
-#       working-directory: ./MyLibrary
-#       run: swift test -v
+    - name: Run tests
+      working-directory: ./MyLibrary
+      run: swift test -v
