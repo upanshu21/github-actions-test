@@ -17,15 +17,15 @@ jobs:
     steps:
     
     - uses: actions/checkout@v3
+    - name: clone mock-server
+      run: git clone https://github.com/upanshu21/open-weather-mock-api.git
     - name: Set up JDK 8
       uses: actions/setup-java@v3
       with:
         java-version: '8'
-        distribution: 'zulu'
-        cache: maven
-    - name: clone mock-server
-      run: git clone https://github.com/upanshu21/open-weather-mock-api.git
+        distribution: 'adopt'
     - name: run mock server
+      working-directory: ./open-weather-mock-api
       run : mvn spring-boot:run
     - name: Build
       working-directory: ./MyLibrary
