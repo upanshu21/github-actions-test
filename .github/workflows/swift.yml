@@ -21,9 +21,12 @@ jobs:
       with:
         java-version: '8'
         distribution: 'adopt'
+    - name: build mock server
+      working-directory: ./open-weather-mock-api
+      run : mvn clean install
     - name: run mock server
       working-directory: ./open-weather-mock-api
-      run : mvn spring-boot:run
+      run : mvn spring-boot:start
     - name: Build
       working-directory: ./MyLibrary
       run: swift build -v
