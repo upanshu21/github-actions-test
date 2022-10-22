@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  Mock-server:
+  build:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v3
@@ -23,14 +23,13 @@ jobs:
         distribution: 'adopt'
     - name: run mock server
       working-directory: ./open-weather-mock-api
-      run : mvn spring-boot:run
-  build:
-    runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v3
+      run : mvn spring-boot:start
     - name: Build
       working-directory: ./MyLibrary
       run: swift build -v
     - name: Run tests
       working-directory: ./MyLibrary
       run: swift test -v
+    - name: stop mock server
+      working-directory: ./open-weather-mock-api
+      run: mvn spring-boot:stop
