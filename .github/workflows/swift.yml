@@ -23,7 +23,7 @@ jobs:
         distribution: 'adopt'
     - name: run mock server
       working-directory: ./open-weather-mock-api
-      run : mvn spring-boot:start
+      run : mvn spring-boot:run
     - name: Build
       working-directory: ./MyLibrary
       run: swift build -v
